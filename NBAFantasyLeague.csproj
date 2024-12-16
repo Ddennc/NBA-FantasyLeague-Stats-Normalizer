@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <!-- Cílová platforma je Android -->
+        <TargetFramework>net9.0-android</TargetFramework>
+        <!-- Minimální podporovaná verze operačního systému Android -->
+        <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+
+        <!-- Typ výstupního souboru (spustitelný program) -->
+        <OutputType>Exe</OutputType>
+
+        <!-- Povolení kontroly hodnot typu Nullable -->
+        <Nullable>enable</Nullable>
+
+        <!-- Automatické přidávání běžně používaných oborů názvů -->
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <!-- Identifikátor aplikace -->
+        <ApplicationId>com.companyname.NBAFantasyLeague</ApplicationId>
+
+        <!-- Verze aplikace -->
+        <ApplicationVersion>1</ApplicationVersion>
+        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+
+        <!-- Povolení optimalizace a analýzy kódu pro odstranění nepoužívaných částí -->
+        <TrimMode>full</TrimMode>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Ikona aplikace -->
+
+        <!-- Úvodní obrazovka aplikace -->
+
+        <!-- Obrázky používané v aplikaci -->
+        <MauiImage Include="Resources\Images\*" />
+        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+        
+        <!-- Vlastní písma -->
+        <MauiFont Include="Resources\Fonts\*" />
+
+        <!-- Surové soubory (například JSON nebo další statické soubory) -->
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.3" />
+        <PackageReference Include="RestSharp" Version="X.X.X" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <MauiXaml Update="View\MainPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="NBAFantasyLeague.AppShell"
+       xmlns:view="clr-namespace:NBAFantasyLeague.View"
+       FlyoutBehavior="Disabled">
+
+    <!-- Ресурсы для Shell -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <!-- Общий стиль для Shell -->
+            <Style TargetType="Shell" ApplyToDerivedTypes="True">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
+                <Setter Property="Shell.NavBarHasShadow" Value="False" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource LightBackground}}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <ShellContent Title="Players" ContentTemplate="{DataTemplate view:MainPage}" />
+    <ShellContent
+        Shell.NavBarIsVisible="true"
+        Title="Players"
+        ContentTemplate="{DataTemplate view:MainPage}"
+        Route="MainPage" />
+</Shell>

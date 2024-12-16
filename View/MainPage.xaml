@@ -1,0 +1,142 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:NBAFantasyLeague.Models"
+             xmlns:viewmodel="clr-namespace:NBAFantasyLeague.ViewModel"
+             x:DataType="viewmodel:PlayersViewModel"
+             Title="{Binding Title}"
+             x:Class="NBAFantasyLeague.View.MainPage"
+             BackgroundColor="#f4f4f8">
+
+    <Grid>
+        <!-- Определяем строки и столбцы -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Панель фильтрации -->
+        <Grid Grid.Row="0" Padding="10" ColumnSpacing="10" BackgroundColor="#ffffff">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Entry Grid.Column="0" 
+                   Placeholder="Search by Name" 
+                   Text="{Binding PlayerNameFilter}" 
+                   BackgroundColor="#e8f5e9" 
+                   TextColor="#2e7d32" />
+            <!-- Фильтр по позиции -->
+            <Picker Grid.Column="1" 
+                    Title="Filter by Position" 
+                    ItemsSource="{Binding Positions}" 
+                    SelectedItem="{Binding SelectedPosition}" 
+                    BackgroundColor="#f3e5f5"
+                    TextColor="#8e24aa" />  
+
+            <!-- Сортировка по показателю -->
+            <Picker Grid.Column="2" 
+                    Title="Sort by" 
+                    ItemsSource="{Binding SortOptions}" 
+                    SelectedItem="{Binding SelectedSortOption}" 
+                    BackgroundColor="#e3f2fd" 
+                    TextColor="#1565c0" />
+
+            <!-- Кнопка применить фильтр -->
+        </Grid>
+
+        <!-- Список игроков -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding FilteredPlayers}" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:PlayerModel">
+                    <Frame Margin="5" Padding="10" BorderColor="LightGray" CornerRadius="15" BackgroundColor="#ffffff" HasShadow="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1.5*" />
+                                <ColumnDefinition Width="2.5*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" /> <!-- Основная информация -->
+                                <RowDefinition Height="Auto" /> <!-- Нормализированные показатели -->
+                            </Grid.RowDefinitions>
+
+                            <!-- Номер игрока -->
+                            <Label Grid.Column="0" 
+                                   Text="{Binding Number}" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#37474f" />
+
+                            <!-- Вертикальная линия (разделитель между номером и именем) -->
+                            <BoxView Grid.Column="1" 
+                                     WidthRequest="2" 
+                                     HeightRequest="20" 
+                                     BackgroundColor="#b0bec5" 
+                                     VerticalOptions="Center" />
+
+                            <!-- Имя игрока -->
+                            <Label Grid.Column="2" 
+                                   Text="{Binding NAME}" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#1a237e" />
+
+                            <!-- Позиция -->
+                            <Label Grid.Column="3" 
+                                   Text="{Binding POS}" 
+                                   FontSize="16" 
+                                   TextColor="#4caf50" />
+
+                            <!-- Команда -->
+                            <Label Grid.Column="4" 
+                                   Text="{Binding TEAM}" 
+                                   FontSize="16" 
+                                   TextColor="#0288d1" />
+
+                            <!-- Количество игр (GP) -->
+                            <Label Grid.Column="5" 
+                                   Text="{Binding GP}" 
+                                   FontSize="16" 
+                                   TextColor="#7b1fa2" />
+
+                            <!-- Финальный счёт -->
+                            <Label Grid.Column="6" 
+                                   Text="{Binding FinalScore, StringFormat='Final: {0:F2}'}" 
+                                   FontSize="16" 
+                                   TextColor="#ff6f00" 
+                                   FontAttributes="Bold" />
+
+                            <!-- Нормализованные показатели -->
+                            <Grid Grid.Row="1" Grid.ColumnSpan="7" Padding="10">
+                                <Label Text="{Binding NormalizedStats}" 
+                                       FontSize="14" 
+                                       TextColor="#0288d1"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Grid>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Кнопка для обновления данных -->
+        <Button Grid.Row="2"
+                Text="Refresh Players"
+                FontSize="16"
+                Padding="10"
+                BackgroundColor="#4caf50"
+                TextColor="White"
+                CornerRadius="20"
+                Command="{Binding GetPlayersCommand}" />
+    </Grid>
+</ContentPage>
