@@ -9,7 +9,11 @@ public partial class PlayersViewModel : BaseViewModel
 {
     public ObservableCollection<PlayerModel> Players { get; } = new();
     public ObservableCollection<PlayerModel> FilteredPlayers { get; } = new();
-    public ObservableCollection<string> Positions { get; } = new() { "All", "G", "F", "C" };
+    public ObservableCollection<string> Positions { get; } = new()
+    {
+        "All", "PG", "SG", "G", "SF", "PF", "F", "C"
+    };
+
     public ObservableCollection<string> SortOptions { get; } = new() 
     {
         "Final Score", 
@@ -71,6 +75,7 @@ public partial class PlayersViewModel : BaseViewModel
         }
     }
 
+  
     [RelayCommand]
     public void ApplyFilters()
     {
@@ -85,12 +90,15 @@ public partial class PlayersViewModel : BaseViewModel
         // Фильтрация по позиции
         if (SelectedPosition != "All")
         {
-            // Позиции "G-F", "F-G", "F-C", "C-F" рассматриваем как несколько позиций
             filtered = SelectedPosition switch
             {
-                "G" => filtered.Where(p => p.POS == "G" || p.POS == "G-F" || p.POS == "F-G"),
-                "F" => filtered.Where(p => p.POS == "F" || p.POS == "F-G" || p.POS == "G-F" || p.POS == "F-C" || p.POS == "C-F"),
-                "C" => filtered.Where(p => p.POS == "C" || p.POS == "F-C" || p.POS == "C-F"),
+                "PG" => filtered.Where(p => p.POS == "PG"),
+                "SG" => filtered.Where(p => p.POS == "SG"),
+                "G" => filtered.Where(p => p.POS == "PG" || p.POS == "SG" || p.POS == "G"),
+                "SF" => filtered.Where(p => p.POS == "SF"),
+                "PF" => filtered.Where(p => p.POS == "PF"),
+                "F" => filtered.Where(p => p.POS == "PF" || p.POS == "SF" || p.POS == "F"),
+                "C" => filtered.Where(p => p.POS == "C"),
                 _ => filtered
             };
         }
@@ -118,4 +126,5 @@ public partial class PlayersViewModel : BaseViewModel
             FilteredPlayers.Add(player);
         }
     }
+
 }
