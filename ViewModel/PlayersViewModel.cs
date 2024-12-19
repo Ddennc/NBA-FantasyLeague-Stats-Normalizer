@@ -19,7 +19,7 @@ public partial class PlayersViewModel : BaseViewModel
         "BPG",
         "SPG",
         "3PM",
-        "FT%",
+        "FTM",
         "FG%",
         "TPG"
     };
@@ -103,7 +103,7 @@ public partial class PlayersViewModel : BaseViewModel
             "RPG" => filtered.OrderByDescending(p => p.NormalizedRPG),
             "APG" => filtered.OrderByDescending(p => p.NormalizedAPG),
             "FG%" => filtered.OrderByDescending(p => p.NormalizedFG),
-            "FT%" => filtered.OrderByDescending(p => p.NormalizedFT),
+            "FTM" => filtered.OrderByDescending(p => p.NormalizedFTM),
             "SPG" => filtered.OrderByDescending(p => p.NormalizedSPG),
             "BPG" => filtered.OrderByDescending(p => p.NormalizedBPG),
             "3PM" => filtered.OrderByDescending(p => p.Normalized3PM),

@@ -35,24 +35,26 @@ public class PlayerService
         double maxAPG = allPlayers.Max(p => p.APG);
         double maxBPG = allPlayers.Max(p => p.BPG);
         double maxSPG = allPlayers.Max(p => p.SPG);
-        double max3PM = allPlayers.Max(p => p._3PA * p._3P / 100); // 3PM = 3PA * 3P%
-        double maxFT =  1; // Максимальный FT% для деления
+        double max3PM = allPlayers.Max(p => p._3PA * p._3P / 100 / p.GP); // 3PM = 3PA * 3P%
+        double maxFT =  1;
+        double maxFTM = allPlayers.Max(p =>p.FT * p.FTA / 100 / p.GP);// Максимальный FT% для деления
         double maxFG = 0.86; // Максимальный eFG% для деления
         double maxTPG = allPlayers.Max(p => p.TPG);
 
         foreach (var player in allPlayers)
         {
             // Рассчитываем FTM
-            player.FTM = player.FT * player.FTA / 100;
+            player.FTM = player.FT * player.FTA / 100 / player.GP;
             // Нормализация показателей
             player.NormalizedPPG = player.PPG / maxPPG;
             player.NormalizedRPG = player.RPG / maxRPG;
             player.NormalizedAPG = player.APG / maxAPG;
             player.NormalizedBPG = player.BPG / maxBPG;
             player.NormalizedSPG = player.SPG / maxSPG;
-            player.Normalized3PM = (player._3PA * player._3P / 100) / max3PM;
+            player.Normalized3PM = (player._3PA * player._3P / 100 / player.GP) / max3PM;
             player.NormalizedFT = player.FT / maxFT;
-            player.NormalizedFG = player.eFG / maxFG;
+            player.NormalizedFTM = player.FTM / maxFTM;
+            player.NormalizedFG = (((player._2PA * player._2P)+(player._3PA * player._3P))/(player._2PA+player._3PA)) / maxFG;
             player.NormalizedTPG = player.TPG / maxTPG;
         }
     }
@@ -68,7 +70,7 @@ public class PlayerService
                                 + player.NormalizedBPG
                                 + player.NormalizedSPG
                                 + player.Normalized3PM
-                                + player.NormalizedFT
+                                + player.NormalizedFTM
                                 + player.NormalizedFG;
 
             // Вычитаем NormalizedTPG

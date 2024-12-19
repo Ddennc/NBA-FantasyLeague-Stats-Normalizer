@@ -66,12 +66,12 @@ public class PlayerModel
     public double NormalizedSPG { get; set; }
     public double Normalized3PM { get; set; }
     public double NormalizedFT { get; set; }
+    public double NormalizedFTM { get; set; }
     public double NormalizedFG { get; set; }
     public double NormalizedTPG { get; set; }
     public double FTM { get; set; }
     public double FinalScore { get; set; }
-    
     public string NormalizedStats => 
-        $"PPG: {NormalizedPPG:F2}, RPG: {NormalizedRPG:F2}, APG: {NormalizedAPG:F2}, BPG: {NormalizedBPG:F2}, SPG: {NormalizedSPG:F2}, 3PM: {Normalized3PM:F2}, FT%: {NormalizedFT:F2}, FG%: {NormalizedFG:F2}, TPG: {NormalizedTPG:F2}";
+        $"PPG: {NormalizedPPG:F2}, RPG: {NormalizedRPG:F2}, APG: {NormalizedAPG:F2}, BPG: {NormalizedBPG:F2}, SPG: {NormalizedSPG:F2}, 3PM: {Normalized3PM:F2}, FTM: {NormalizedFTM:F2}, FG%: {NormalizedFG:F2}, TPG: {NormalizedTPG:F2}";
     public int Number { get; set; }
 }
