@@ -19,9 +19,6 @@ public partial class PlayersViewModel : BaseViewModel
         "BPG",
         "SPG",
         "3PM",
-        "FTM",
-        "FG%",
-        "TPG"
     };
 
     private readonly PlayerService playerService;
@@ -102,13 +99,10 @@ public partial class PlayersViewModel : BaseViewModel
             "PPG" => filtered.OrderByDescending(p => p.NormalizedPPG),
             "RPG" => filtered.OrderByDescending(p => p.NormalizedRPG),
             "APG" => filtered.OrderByDescending(p => p.NormalizedAPG),
-            "FG%" => filtered.OrderByDescending(p => p.NormalizedFG),
-            "FTM" => filtered.OrderByDescending(p => p.NormalizedFTM),
             "SPG" => filtered.OrderByDescending(p => p.NormalizedSPG),
             "BPG" => filtered.OrderByDescending(p => p.NormalizedBPG),
             "3PM" => filtered.OrderByDescending(p => p.Normalized3PM),
-            "TPG" => filtered.OrderByDescending(p => p.NormalizedTPG),
-            _ => filtered
+           
         };
 
         // Обновление FilteredPlayers

@@ -69,12 +69,7 @@ public class PlayerService
                                 + player.NormalizedAPG
                                 + player.NormalizedBPG
                                 + player.NormalizedSPG
-                                + player.Normalized3PM
-                                + player.NormalizedFTM
-                                + player.NormalizedFG;
-
-            // Вычитаем NormalizedTPG
-            player.FinalScore -= player.NormalizedTPG;
+                                + player.Normalized3PM;
         }
     }
 } 
