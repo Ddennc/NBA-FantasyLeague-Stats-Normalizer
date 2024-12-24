@@ -25,7 +25,11 @@ public partial class PlayersViewModel : BaseViewModel
         "3PM",
         "FT%",
         "FG%",
-        "TPG"
+        "FGM",
+        "FTM",
+        "ORPG",
+        "3P%",
+        "DD",
     };
 
     private readonly PlayerService playerService;
@@ -115,7 +119,11 @@ public partial class PlayersViewModel : BaseViewModel
             "SPG" => filtered.OrderByDescending(p => p.NormalizedSPG),
             "BPG" => filtered.OrderByDescending(p => p.NormalizedBPG),
             "3PM" => filtered.OrderByDescending(p => p.Normalized3PM),
-            "TPG" => filtered.OrderByDescending(p => p.NormalizedTPG),
+            "FTM" => filtered.OrderByDescending(p => p.NormalizedFTM),
+            "FGM" => filtered.OrderByDescending(p => p.NormalizedFGM),
+            "3P%" => filtered.OrderByDescending(p => p.Normalized_3P),
+            "ORPG" => filtered.OrderByDescending(p => p.NormalizedORPG),
+            "DD" => filtered.OrderByDescending(p => p.NormalizedDD),
             _ => filtered
         };
 

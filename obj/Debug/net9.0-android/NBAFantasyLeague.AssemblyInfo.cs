@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NBAFantasyLeague")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a9e057b92df6b1c89c7ef2cfc4395ae7c4078f7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+e04ff73e8d87fe163f89fa64f872a57df4b6bb1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("NBAFantasyLeague")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NBAFantasyLeague")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

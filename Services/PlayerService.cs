@@ -8,7 +8,7 @@ public class PlayerService
 {
     private List<PlayerModel> playerList;
     private readonly HttpClient httpClient = new HttpClient();
-    private readonly string apiUrl = "https://api.sportradar.com/nba/trial/v8/en/seasons/2024/REG/leaders.json?api_key="; 
+    private readonly string apiUrl = "https://api.sportradar.com/nba/trial/v8/en/seasons/2024/REG/leaders.json?api_key=ztdjHZvjvAoccAiRgvcxYrIs4xT68nuzJg5NHo15"; 
 
     public async Task<List<PlayerModel>> GetPlayers()
     {
@@ -70,6 +70,10 @@ public class PlayerService
                 FTM = average.GetProperty("free_throws_made").GetDouble(),
                 FT = total.GetProperty("free_throws_pct").GetDouble(),
                 FG = total.GetProperty("field_goals_pct").GetDouble(),
+                FGM = average.GetProperty("field_goals_made").GetDouble(),
+                _3P = total.GetProperty("three_points_pct").GetDouble(),
+                ORPG = average.GetProperty("off_rebounds").GetDouble(),
+                DD = total.GetProperty("double_doubles").GetDouble(),
             });
         }
     }
@@ -86,7 +90,13 @@ public class PlayerService
         double maxBPG = allPlayers.Max(p => p.BPG);
         double maxSPG = allPlayers.Max(p => p.SPG);
         double max3PM = allPlayers.Max(p => p._3PM);
-        double maxFT = 1, maxFG = 0.86, maxTPG = allPlayers.Max(p => p.TPG);
+        double maxFT = 1, maxFG = 0.733, maxTPG = allPlayers.Max(p => p.TPG);
+        double maxFGM = allPlayers.Max(p => p.FGM);
+        double max_3P = allPlayers.Max(p => p._3PM > 1 ? p._3P : 0);
+        double maxORPG = allPlayers.Max(p => p.ORPG);
+        double maxDD = allPlayers.Max(p => p.DD);
+        double maxFTM = allPlayers.Max(p => p.FTM);
+        
 
         foreach (var player in allPlayers)
         {
@@ -99,6 +109,11 @@ public class PlayerService
             player.NormalizedFT = player.FT / maxFT;
             player.NormalizedFG = player.FG / maxFG;
             player.NormalizedTPG = player.TPG / maxTPG;
+            player.NormalizedFGM = player.FGM / maxFGM;
+            player.Normalized_3P = player._3PM > 1 ? player._3P / max_3P : 0;
+            player.NormalizedORPG = player.ORPG / maxORPG;
+            player.NormalizedDD = player.DD / maxDD;
+            player.NormalizedFTM = player.FTM / maxFTM;
         }
     }
 
@@ -114,7 +129,11 @@ public class PlayerService
                                 + player.Normalized3PM
                                 + player.NormalizedFT
                                 + player.NormalizedFG
-                                - player.NormalizedTPG;
+                                + player.NormalizedFGM
+                                + player.Normalized_3P
+                                + player.NormalizedORPG
+                                + player.NormalizedDD
+                                + player.NormalizedFTM;
         }
     }
 }
